@@ -6,6 +6,7 @@ const util = require('../../utils/util.js')
 
 Page({
   data: {
+    src:'',
     type:'primary',
     count: 0,
     motto: 'Hello World',
@@ -37,16 +38,16 @@ Page({
   start: function(){
     this.setData({
       status:'结束',
-      type:'warn'
+      type:'warn',
+      src:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560610916937&di=4450b682645663a7898cc17efb758ddd&imgtype=0&src=http%3A%2F%2Fwww.jiayouernv.net%2FuFile%2F18420%2Fimage%2F20161026102950191.jpg'
     });
-    var num = 0;
-    this.timer = setInterval(() => {
-      this.setData({
-        times: ++num,
-        min: Math.floor(num / 60)
-      });
-    }, 1000);
-    this.breastfeed = wx.getStorageSync('breastfeed') || { list: [] };
+    // var num = 0;
+    // this.timer = setInterval(() => {
+    //   this.setData({
+    //     times: ++num,
+    //     min: Math.floor(num / 60)
+    //   });
+    // }, 1000);
     var date = { date: util.formatTime(new Date()), times: new Date() };
     var dateday = util.formatDate(new Date());
     this.breastfeed.list.push(date);
@@ -55,7 +56,7 @@ Page({
     this.breastfeed.day = day;
   },
   end: function () {
-    clearInterval(this.timer);
+    // clearInterval(this.timer);
     var startTime = this.breastfeed.list[this.breastfeed.list.length - 1]['times'];
     this.breastfeed.list[this.breastfeed.list.length - 1]['times'] = Math.ceil((new Date().getTime()-startTime.getTime())/1000);
     this.setData({
@@ -63,7 +64,9 @@ Page({
       times: 0,
       min: 0,
       status: '开始',
-      type: 'primary'
+      type: 'primary',
+      count: Object.keys(this.breastfeed.day).length,
+      src: this.data.userInfo.avatarUrl
     });
     wx.setStorage({
       key: 'breastfeed',
@@ -80,7 +83,8 @@ Page({
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+        hasUserInfo: true,
+        src: app.globalData.userInfo.avatarUrl
       })
     } else if (this.data.canIUse){
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -103,10 +107,10 @@ Page({
         }
       })
     }
-    // var breastfeed = wx.getStorageSync('breastfeed')||{count:0};
-    // this.setData({
-    //   count:breastfeed.count
-    // });
+    this.breastfeed = wx.getStorageSync('breastfeed') || { list: [],day:{} };
+    this.setData({
+      count: Object.keys(this.breastfeed.day).length||0
+    });
   },
   getUserInfo: function(e) {
     console.log(e)

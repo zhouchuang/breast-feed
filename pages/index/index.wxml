@@ -3,12 +3,12 @@
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
     <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{src}}" background-size="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
   <button class="button" type="{{type}}" size="default" loading="{{loading}}" plain="{{plain}}"
-  disabled="{{disabled}}" bindtap="clickHander"> 吃奶{{status}} {{min || 0}}′{{times%60}}′′ </button>
+  disabled="{{disabled}}" bindtap="clickHander"> 吃奶{{status}} </button>
   <button class="button" type="default" size="default" loading="{{loading}}" plain="{{plain}}"
   disabled="{{disabled}}" bindtap="history"> 吃奶历史 </button>
   <view class="usermotto">

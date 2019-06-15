@@ -27,7 +27,7 @@ Page({
       var currm ;
       console.log(this.breastfeed);
       for (var i = this.breastfeed.list.length-1;i>=0;i--) {
-        if (this.breastfeed.list.length - i>10)break;
+        if (this.breastfeed.list.length - i>20)break;
         if(currm!=this.breastfeed.list[i].date.split(' ')[0]){
           currm = this.breastfeed.list[i].date.split(' ')[0];
           temp.push({day:currm});
