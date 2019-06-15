@@ -1,0 +1,8 @@
+<view>
+  <view wx:for="{{list}}"  class="layout_horizontal">
+    <view style="flex:3;font-size:14px;">{{item.date}}</view>
+    <view style="flex:8;"><progress percent="{{item.per}}" stroke-width="14"/></view>
+    <view style="flex:1;font-size:14px;">{{item.min || 1}}′</view>
+  </view>
+</view>
+ 

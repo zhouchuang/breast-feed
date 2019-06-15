@@ -1,0 +1,10 @@
+/* pages/main/main.wxss */
+/*横向布局  */
+.layout_horizontal{
+  display: flex;
+  flex-direction: row;
+}
+.button{
+  width: 100%;
+  position: relative; left: -50%; border: dotted red 1px;
+}
