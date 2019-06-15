@@ -1,8 +1,13 @@
 <view>
   <view wx:for="{{list}}"  class="layout_horizontal">
-    <view style="flex:3;font-size:14px;">{{item.date}}</view>
-    <view style="flex:8;"><progress percent="{{item.per}}" stroke-width="14"/></view>
-    <view style="flex:1;font-size:14px;">{{item.min || 1}}′</view>
+    <block  wx:if="{{item.day!=null}}">
+      {{item.day}}
+    </block >
+    <block  wx:if="{{item.day==null}}">
+      <view style="flex:2;font-size:14px;">{{item.date}}</view>
+      <view style="flex:8;"><progress percent="{{item.per}}" stroke-width="16"/></view>
+      <view style="flex:2;font-size:14px;">{{item.min || 0}}′{{item.times%60}}′′</view>
+    </block >
   </view>
 </view>
  

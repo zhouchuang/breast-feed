@@ -24,12 +24,19 @@ Page({
   transfer:function(){
     if (this.breastfeed.list && this.breastfeed.list.length) {
       var temp = [];
-      for (var i in this.breastfeed.list) {
+      var currm ;
+      console.log(this.breastfeed);
+      for (var i = this.breastfeed.list.length-1;i>=0;i--) {
+        if (this.breastfeed.list.length - i>10)break;
+        if(currm!=this.breastfeed.list[i].date.split(' ')[0]){
+          currm = this.breastfeed.list[i].date.split(' ')[0];
+          temp.push({day:currm});
+        }
         temp.push({
-          min: Math.ceil(this.breastfeed.list[i].times / 60),
+          min: Math.floor(this.breastfeed.list[i].times / 60),
           times: this.breastfeed.list[i].times,
-          per: Math.ceil(this.breastfeed.list[i].times/20),
-          date: this.breastfeed.list[i].date
+          per: Math.ceil(this.breastfeed.list[i].times/18),
+          date: this.breastfeed.list[i].date.split(' ')[1]
         });
       }
       this.setData({

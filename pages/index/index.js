@@ -47,12 +47,17 @@ Page({
       });
     }, 1000);
     this.breastfeed = wx.getStorageSync('breastfeed') || { list: [] };
-    var date = { date: util.formatTime(new Date()), times: 1 };
+    var date = { date: util.formatTime(new Date()), times: new Date() };
+    var dateday = util.formatDate(new Date());
     this.breastfeed.list.push(date);
+    var day = this.breastfeed.day || {};
+    day[dateday] = (day[dateday]||0)+1;
+    this.breastfeed.day = day;
   },
   end: function () {
     clearInterval(this.timer);
-    this.breastfeed.list[this.breastfeed.list.length - 1]['times'] = this.data.times;
+    var startTime = this.breastfeed.list[this.breastfeed.list.length - 1]['times'];
+    this.breastfeed.list[this.breastfeed.list.length - 1]['times'] = Math.ceil((new Date().getTime()-startTime.getTime())/1000);
     this.setData({
       list: this.breastfeed.list,
       times: 0,
