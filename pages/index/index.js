@@ -60,21 +60,30 @@ Page({
   end: function () {
     // clearInterval(this.timer);
     var startTime = this.breastfeed.list[this.breastfeed.list.length - 1]['times'];
-    this.breastfeed.list[this.breastfeed.list.length - 1]['times'] = Math.ceil((new Date().getTime()-startTime.getTime())/1000);
-    this.setData({
-      list: this.breastfeed.list,
-      times: 0,
-      min: 0,
-      status: '开始',
-      type: 'primary',
-      count: Object.keys(this.breastfeed.day).length,
-      src: this.data.userInfo.avatarUrl
-    });
-    wx.setStorage({
-      key: 'breastfeed',
-      data: this.breastfeed,
-    });
-    this.history();
+    if (new Date().getTime() - startTime.getTime()>=60000){
+      this.breastfeed.list[this.breastfeed.list.length - 1]['times'] = Math.ceil((new Date().getTime() - startTime.getTime()) / 1000);
+      this.setData({
+        list: this.breastfeed.list,
+        times: 0,
+        min: 0,
+        status: '开始',
+        type: 'primary',
+        count: Object.keys(this.breastfeed.day).length,
+        src: this.data.userInfo.avatarUrl
+      });
+      wx.setStorage({
+        key: 'breastfeed',
+        data: this.breastfeed,
+      });
+      this.history();
+    }else{
+      this.setData({
+        status: '开始',
+        type: 'primary',
+        count: Object.keys(this.breastfeed.day).length,
+        src: this.data.userInfo.avatarUrl
+      });
+    }
   },
   history:function(){
     wx.navigateTo({
