@@ -36,10 +36,12 @@ Page({
     }
   },
   start: function(){
+    var imgpath = "http://47.98.158.112:8091/upload/iJob/images/baby/" + Math.ceil(Math.random() * 5)+".jpg";
     this.setData({
       status:'结束',
       type:'warn',
-      src:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560610916937&di=4450b682645663a7898cc17efb758ddd&imgtype=0&src=http%3A%2F%2Fwww.jiayouernv.net%2FuFile%2F18420%2Fimage%2F20161026102950191.jpg'
+      // src:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560610916937&di=4450b682645663a7898cc17efb758ddd&imgtype=0&src=http%3A%2F%2Fwww.jiayouernv.net%2FuFile%2F18420%2Fimage%2F20161026102950191.jpg'
+      src: imgpath
     });
     // var num = 0;
     // this.timer = setInterval(() => {
