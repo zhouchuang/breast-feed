@@ -35,13 +35,15 @@ Page({
       this.end();
     }
   },
+  randomImg:function(){
+    return "http://47.98.158.112:8091/upload/iJob/images/baby/" + Math.ceil(Math.random() * 5) + ".jpg";
+  },
   start: function(){
-    var imgpath = "http://47.98.158.112:8091/upload/iJob/images/baby/" + Math.ceil(Math.random() * 5)+".jpg";
     this.setData({
       status:'结束',
       type:'warn',
       // src:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560610916937&di=4450b682645663a7898cc17efb758ddd&imgtype=0&src=http%3A%2F%2Fwww.jiayouernv.net%2FuFile%2F18420%2Fimage%2F20161026102950191.jpg'
-      src: imgpath
+      src: this.randomImg()
     });
     // var num = 0;
     // this.timer = setInterval(() => {
@@ -69,7 +71,7 @@ Page({
         status: '开始',
         type: 'primary',
         count: Object.keys(this.breastfeed.day).length,
-        src: this.data.userInfo.avatarUrl
+        src: this.randomImg()
       });
       wx.setStorage({
         key: 'breastfeed',
@@ -81,7 +83,7 @@ Page({
         status: '开始',
         type: 'primary',
         count: Object.keys(this.breastfeed.day).length,
-        src: this.data.userInfo.avatarUrl
+        src: this.randomImg()
       });
     }
   },
@@ -95,7 +97,7 @@ Page({
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true,
-        src: app.globalData.userInfo.avatarUrl
+        src: this.randomImg()
       })
     } else if (this.data.canIUse){
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -104,7 +106,7 @@ Page({
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true,
-          src: res.userInfo.avatarUrl
+          src: this.randomImg()
         })
       }
     } else {
