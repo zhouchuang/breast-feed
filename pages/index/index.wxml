@@ -12,6 +12,6 @@
   <button class="button" type="default" size="default" loading="{{loading}}" plain="{{plain}}"
   disabled="{{disabled}}" bindtap="history"> 吃奶历史 </button>
   <view class="usermotto">
-    <text class="user-motto">记录{{count}}天</text>
+    <text class="user-motto">共记录{{count}}天</text>
   </view>
 </view>
