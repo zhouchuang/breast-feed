@@ -62,7 +62,7 @@ Page({
   end: function () {
     // clearInterval(this.timer);
     var startTime = this.breastfeed.list[this.breastfeed.list.length - 1]['times'];
-    if (new Date().getTime() - startTime.getTime()>=60000  || true){
+    if (new Date().getTime() - startTime.getTime()>=60000){
       this.breastfeed.list[this.breastfeed.list.length - 1]['times'] = Math.ceil((new Date().getTime() - startTime.getTime()) / 1000);
       this.setData({
         list: this.breastfeed.list,
