@@ -10,13 +10,19 @@ Page({
     min:0,
     list: []
   },
+  start: 0,
+  size:30,
   timer:0,
   breastfeed:{list:[]},
+  canload:true,
+  currm:null,
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.start = 0;
+    this.canload = true;
     this.breastfeed = wx.getStorageSync('breastfeed') || { list: [] };
     this.transfer();
   },
@@ -24,13 +30,15 @@ Page({
   transfer:function(){
     if (this.breastfeed.list && this.breastfeed.list.length) {
       var temp = [];
-      var currm ;
-      console.log(this.breastfeed);
-      for (var i = this.breastfeed.list.length-1;i>=0;i--) {
-        if (this.breastfeed.list.length - i>20)break;
-        if(currm!=this.breastfeed.list[i].date.split(' ')[0]){
-          currm = this.breastfeed.list[i].date.split(' ')[0];
-          temp.push({day:currm});
+      // for (var i = this.breastfeed.list.length-1;i>=0;i--) {
+      for (var i = this.breastfeed.list.length - 1 - this.start * this.size; i >= this.breastfeed.list.length - 1 - this.start - this.size*(this.start+1);i--){
+        if(i<0){
+          this.canload = false;
+          break;
+        }
+        if(this.currm!=this.breastfeed.list[i].date.split(' ')[0]){
+          this.currm = this.breastfeed.list[i].date.split(' ')[0];
+          temp.push({ day: this.currm});
         }
         temp.push({
           min: Math.floor(this.breastfeed.list[i].times / 60),
@@ -40,7 +48,7 @@ Page({
         });
       }
       this.setData({
-        list: temp
+        list: this.data.list.concat(temp)
       });
     }
   },
@@ -84,7 +92,10 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    if (this.canload){
+      this.start++;
+      this.transfer();
+    }
   },
 
   /**

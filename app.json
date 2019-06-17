@@ -10,5 +10,7 @@
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 100
 }
